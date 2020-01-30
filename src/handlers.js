@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const createOptions = require("./logic.js");
-const info = require("./cities-logic");
 const photos = require("./photos");
 
 /* Handles home directory and opens index.html*/
