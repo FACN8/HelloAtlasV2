@@ -10,7 +10,10 @@ const router = function(request, response) {
         handlers.handlePublic(request, response);
     } else if (url.indexOf('/type') !== -1) {
         handlers.handleType(request, response);
-    } else {
+    }else if (url.indexOf('/photos') !== -1) {
+        handlers.handlePhotos(request, response);
+    }
+     else {
         handlers.handleError(request, response);
     }
 }
