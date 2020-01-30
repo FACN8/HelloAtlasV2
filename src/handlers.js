@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const createOptions = require("./logic.js");
 const photos = require("./photos");
+const countrydata = require('./application')
 
 /* Handles home directory and opens index.html*/
 const handleHome = (request, response) => {
@@ -17,7 +18,7 @@ const handleHome = (request, response) => {
   });
 };
 
-/* Handles requests of files from public directory*/
+/*--- Handles requests of files from public directory ---*/
 const handlePublic = (request, response) => {
   const endpoint = request.url;
   const extension = endpoint.split(".")[1];
@@ -27,6 +28,7 @@ const handlePublic = (request, response) => {
     js: "application/javascript",
     ico: "image/x-icon",
     jpg: "image/x-icon",
+    jpeg: "image/x-icon",
     png: "image/x-icon"
   };
   const filePath = path.join(__dirname, "..", endpoint);
@@ -40,7 +42,7 @@ const handlePublic = (request, response) => {
   });
 };
 
-/* Handles typing requests*/
+/*--- Handles typing requests ---*/
 const handleType = (request, response) => {
   const endpoint = request.url.split("/")[2];
   response.writeHead(200);
@@ -57,6 +59,17 @@ const handlePhotos = (request, response) => {
   });
 };
 
+const handleSearchCountry = (request, response) => {
+  response.writeHead(200, { "content-Type": "application/json" });
+  countrydata(function(error, res) {
+    if (error) {
+      console.log("error 3");
+    } else {
+      response.end(JSON.stringify(res));
+    }
+  });
+};
+
 const handleError = (request, response) => {
   response.writeHead(404);
   response.end("Oh no! File not Found!");
@@ -67,5 +80,6 @@ module.exports = {
   handleHome,
   handlePublic,
   handleType,
+  handleSearchCountry,
   handleError
 };

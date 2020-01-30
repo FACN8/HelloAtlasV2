@@ -1,24 +1,23 @@
-// A listener maybe for typing a character ?
-//  var textInput = document.querySelector('#ajax');
-var countryContainer = document.querySelector(".country-container");
-var datalist = document.getElementById("json-datalist");
-var SubmitBtn = document.getElementById("submit-btn");
-const apiContainer = document.querySelector(".api-container");
 
-var xhr = new XMLHttpRequest();
+/*--- Prevent form default action ---*/
+searchForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+});
 
+/*--- Typing listener Section ---*/
 textInput.oninput = function() {
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      var data = JSON.parse(xhr.responseText);
-      createDataSet(data);
-    }
-  };
-  xhr.open("GET", "/type/" + textInput.value, true);
-  xhr.send();
+  axios
+    .get("/type/" + textInput.value)
+    .then(function(response) {
+      createDataSet(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 };
+/*--- Typing listener Section - End ---*/
 
-// Create drop down list of suggestions based on data
+/*--- Create dataSet and autocomplete form ---*/
 function createDataSet(data) {
   var datalist = document.getElementById("json-datalist");
   while (datalist.firstChild) {
@@ -30,28 +29,37 @@ function createDataSet(data) {
     datalist.appendChild(opt);
   });
 }
+/*--- Create dataSet and autocomplete form - End ---*/
 
-// A listener for submit event / click
-var xhr2 = new XMLHttpRequest();
-
+/*--- submit and serach button section ---*/
 SubmitBtn.addEventListener("click", function() {
-  event.preventDefault();
-
   while (datalist.firstChild) {
     datalist.removeChild(datalist.firstChild);
   }
-  xhr2.onreadystatechange = function() {
-    if (xhr2.readyState == 4 && xhr2.status == 200) {
-      var data = JSON.parse(xhr2.responseText);
+
+  axios
+    .get("/countriesFromBackEnd", {
+      params: {
+        country: textInput.value
+      }
+    })
+    .then(function(response) {
+      var data = response.data;
       removeCountry();
       addCountryDetails(data);
       textInput.value = "";
-    }
-  };
-  xhr2.open("GET", "https://restcountries.eu/rest/v2/all");
-  xhr2.send();
-});
+    })
+    .catch(function(error) {
+      console.log(error);
+      console.log("This is the error");
 
+      textInput.value = "";
+    });
+});
+/*--- submit and serach button section - End ---*/
+
+/*--- Country Details Section ---*/
+/*--- Manage API response and add details ---*/
 function addCountryDetails(data) {
   var country = "";
   var capitalCity = "";
@@ -102,12 +110,10 @@ function addCountryDetails(data) {
 }
 
 function removeCountry() {
-  if (countryContainer.childNodes.length > 0) {
-    for (var i = 0; i < countryContainer.childNodes.length; i++) {
-      countryContainer.removeChild(countryContainer.childNodes[i]);
+    while (countryContainer.firstChild) {
+      countryContainer.removeChild(countryContainer.firstChild);
     }
   }
-}
 
 function fillPhotos(photoArray, div) {
   photoArray.forEach(url => {
