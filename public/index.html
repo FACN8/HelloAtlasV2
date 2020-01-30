@@ -11,36 +11,35 @@
 
 <body>
     <div class="main-container">
-        <!-- Live response ? method type post/get? -->
-        <!-- <form action="/search" class="search-form" method="post" autocomplete="off"> -->
+        <div class="search-container">
+            </form>
+            <form action="" class="search-form"  autocomplete="off">
 
-        <!-- <input type="text" id="ajax" list="json-datalist" placeholder="Please Insert a Country"> -->
-        <!-- The datalist will be filled using JS - show 10 options  -->
-        <!-- <datalist id="json-datalist">  -->
-        <!-- </datalist>
-            <input type="button" value="Search" id="submit-btn">
-        </form> -->
-        <form action="/search" class="search-form" method="post" autocomplete="off">
-
-            <input type="text" id="ajax" list="json-datalist" placeholder="Please Insert a Country">
-            <!-- The datalist will be filled using JS - show 10 options  -->
-            <datalist id="json-datalist">
-                 <option value="Syrian Arab Republic">
-                 <option value="Palestine">
-                 <option value="China">
-                 <option value="Germany">
-                 <option value="Ireland">
-                 <option value="Liechtenstein">
-                 <option value="Russian Federation">
-                 <option value="South Hampton">
-                 <option value="Sweden">
-                 <option value="Zimbabwe">
-            </datalist>
-            <input type="submit" value="Search" id="submit-btn">
-        </form>
+                <input type="text" id="ajax" list="json-datalist" placeholder="Please Insert a Country">
+                <!-- The datalist will be filled using JS - show 10 options  -->
+                <datalist id="json-datalist">
+                    <option value="Syrian Arab Republic">
+                    <option value="Palestine">
+                    <option value="China">
+                    <option value="Germany">
+                    <option value="Ireland">
+                    <option value="Liechtenstein">
+                    <option value="Russian Federation">
+                    <option value="South Hampton">
+                    <option value="Sweden">
+                    <option value="Zimbabwe">
+                </datalist>
+                <input type="submit" value="Search" id="submit-btn">
+            </form>
+        </div>
+        <div class="info-container">
+            <div class="country-container"></div>
+        </div>
     </div>
-    <div class="country-container"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../public/extra-info.js"></script>
     <script src="../public/script.js"></script>
+    
 </body>
 
 </html>

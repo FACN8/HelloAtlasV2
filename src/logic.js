@@ -1,6 +1,7 @@
 // Basic requires for filesystem,path, and the jsons with our data
 const fs = require("fs");
 const path = require("path");
+
 // Loading the data by requiring the JSON files
 const countriesList = require("../data/countries.json");
 const citiesList = require("../data/cities.json");
@@ -23,6 +24,7 @@ function createOptions(string) {
 // the Array.some method, works a bit like forEach but it will
 // stop anytime the callback returns true
 
+  
   countriesList.some(country => {
     if (currentNumberOfOptions >= requiredNumberOfOptions) {
       return true;
@@ -33,8 +35,7 @@ function createOptions(string) {
       currentNumberOfOptions++;
     }
   });
-
-
+  
   citiesList.some(city => {
     if (currentNumberOfOptions >= requiredNumberOfOptions) {
       return true;
@@ -44,6 +45,7 @@ function createOptions(string) {
       currentNumberOfOptions++;
     }
   });
+
   return optionsList;
 }
 
