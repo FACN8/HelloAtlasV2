@@ -1,6 +1,15 @@
-# HelloAtlas
-Hitchhikers Guide to Countries and Cities - By Orange Room Factory
-https://hello-atlas.herokuapp.com/
+# HelloAtlas V2
+Hitchhikers Guide to Countries and Cities - By Orange Room Factory Exiles
+https://atlasv2.herokuapp.com/
+## This projects adds on our previous project HelloAtlas 
+### Changes :
+*Refactored all requests from xhr to axios.
+*Added a new routes for backend requests.
+*Moved the request we had on front-end to back end.
+*Added photos using a new API on the backend.
+*Modified CSS, HTML and writing the the DOM to fit the new photos.
+*Added tests to test routes on router.js.
+*Added CI using circleci, added config.yaml, and used the app on their website.
 
 ---
 
